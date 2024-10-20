@@ -1,4 +1,5 @@
-import AuthProvider from "@/app/AuthProvider";
+import AccountProvider from "@/app/AccountProvider";
+import { AuthProvider } from "@/app/AuthProvider";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ReactNode, Suspense } from "react";
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Suspense>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <AccountProvider>{children}</AccountProvider>
+          </AuthProvider>
         </Suspense>
       </body>
     </html>

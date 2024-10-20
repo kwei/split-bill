@@ -38,7 +38,8 @@ const createGroupTable = async (groupId: number) => {
 };
 
 const getAllBills = async (groupId: number) => {
-  return await sql`SELECT * FROM group_ledger_<${groupId}>;`;
+  const { rows } = await sql`SELECT * FROM group_ledger_<${groupId}>;`;
+  return rows;
 };
 
 const deleteGroupTable = async (groupId: number) => {

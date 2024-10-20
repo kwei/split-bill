@@ -11,6 +11,7 @@ type Sharer = {
 };
 
 interface Bill {
+  entry_id: number;
   date: string;
   payer: string;
   totalAmount: number;
@@ -19,7 +20,8 @@ interface Bill {
 }
 
 interface Group {
-  id: number;
+  uid: string;
   name: string;
   members: string[];
+  link: string;
 }

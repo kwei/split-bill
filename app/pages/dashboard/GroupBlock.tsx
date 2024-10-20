@@ -1,5 +1,16 @@
-import Link from "next/link";
+"use client";
 
-export const GroupBlock = ({ data }: { data: Group }) => {
-  return <Link href={`../group/${data.id}/`}>{data.name}</Link>;
+import { deleteGroupById } from "@/app/services/group";
+
+interface Props {
+  data: Group;
+  key: string;
+}
+
+export const GroupBlock = ({ data }: Props) => {
+  const onClick = () => {
+    deleteGroupById(data.uid).then();
+  };
+
+  return <button onClick={onClick}>{data.name}</button>;
 };

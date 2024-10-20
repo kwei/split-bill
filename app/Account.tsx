@@ -1,14 +1,11 @@
 "use client";
 
-import { useUserContext } from "@/app/AuthProvider";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export const Account = () => {
   const { data: session, status } = useSession();
-  const { setUser } = useUserContext();
 
   const handleSignIn = () => {
     signIn("google", {
@@ -20,39 +17,6 @@ export const Account = () => {
   const handleSignOut = () => {
     signOut().then();
   };
-
-  useEffect(() => {
-    if (session?.user?.email) {
-      const newUser = {
-        email: session.user.email,
-        groups: "",
-        image: session.user.image ?? "",
-        name: session.user.name ?? "",
-      };
-      fetch("/api/account", {
-        method: "POST",
-        body: JSON.stringify({
-          method: "get",
-          data: session.user.email,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.status) {
-            setUser(res.data);
-          } else {
-            fetch("/api/account", {
-              method: "POST",
-              body: JSON.stringify({
-                method: "set",
-                data: JSON.stringify(newUser),
-              }),
-            }).then();
-            setUser(newUser);
-          }
-        });
-    }
-  }, [session]);
 
   if (status === "loading") {
     return <div className="w-full flex flex-col items-center">載入中...</div>;
