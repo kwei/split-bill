@@ -30,7 +30,7 @@ const createGroupTable = async (groupId: number) => {
   return await sql`CREATE TABLE IF NOT EXISTS group_ledger_<${groupId}> (
     entry_id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
-    payer VARCHAR(255) NOT NULL,
+    payer JSON NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
     description TEXT,
     sharers JSON
@@ -50,7 +50,7 @@ const addBill = async ({ groupId, bill }: { groupId: number; bill: Bill }) => {
   return await sql`INSERT INTO group_ledger_<${groupId}> (date, payer, total_amount, description, sharers) 
 		VALUES (
 			${bill.date}, 
-			${bill.payer}, 
+			${JSON.stringify(bill.payer)}, 
 			${bill.totalAmount}, 
 			${bill.description}, 
 			${JSON.stringify(bill.sharers)}

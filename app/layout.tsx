@@ -1,5 +1,5 @@
-import AccountProvider from "@/app/AccountProvider";
-import { AuthProvider } from "@/app/AuthProvider";
+import AccountProvider from "@/app/context/AccountProvider";
+import { AuthProvider } from "@/app/context/AuthProvider";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ReactNode, Suspense } from "react";

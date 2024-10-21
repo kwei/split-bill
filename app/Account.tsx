@@ -31,6 +31,7 @@ export const Account = () => {
               alt={session.user?.name ?? ""}
               width={64}
               height={64}
+              priority
             />
             <span className="flex-1 text-lg font-semibold text-center">
               {session.user?.name}

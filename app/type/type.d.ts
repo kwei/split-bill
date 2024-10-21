@@ -6,14 +6,14 @@ interface User {
 }
 
 type Sharer = {
-  email: string;
+  user: User;
   amount: number;
 };
 
 interface Bill {
   entry_id: number;
   date: string;
-  payer: string;
+  payer: User;
   totalAmount: number;
   description: string;
   sharers: Sharer[];
@@ -22,6 +22,6 @@ interface Bill {
 interface Group {
   uid: string;
   name: string;
-  members: string[];
+  members: User[];
   link: string;
 }

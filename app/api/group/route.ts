@@ -33,7 +33,7 @@ const createGroupListTable = async () => {
     group_id SERIAL PRIMARY KEY,
     uid TEXT NOT NULL,
     name VARCHAR(255) NOT NULL,
-    members TEXT,
+    members JSON,
     link TEXT NOT NULL
 	);`;
 };
@@ -53,7 +53,7 @@ const addGroup = async ({
     VALUES (
       ${uid},
       ${name}, 
-      ${members.join(",")}, 
+      ${JSON.stringify(members)}, 
       ${link}
     );`;
 };
@@ -66,7 +66,7 @@ const updateGroupMembers = async ({
   members: string[];
 }) => {
   return await sql`UPDATE groups 
-    SET members = ${members.join(",")}
+    SET members = ${JSON.stringify(members)}
     WHERE uid = ${uid};`;
 };
 
